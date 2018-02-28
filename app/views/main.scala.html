@@ -1,0 +1,28 @@
+@(title: String, javascriptAppFileName: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/pure-responsive-grid.css")">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <script src="@routes.Assets.versioned("javascripts/build/".concat(javascriptAppFileName))" type="text/javascript"></script>
+        <!-- Fav Icon Start -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/fav-icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/fav-icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/fav-icon/favicon-16x16.png">
+        <link rel="manifest" href="/assets/images/fav-icon/site.webmanifest">
+        <link rel="mask-icon" href="/assets/images/fav-icon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="/assets/images/fav-icon/favicon.ico">
+        <meta name="msapplication-TileColor" content="#b91d47">
+        <meta name="msapplication-config" content="/assets/images/fav-icon/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
+        <!-- Fav Icon End -->
+    </head>
+    <body>
+        @content
+    </body>
+</html>

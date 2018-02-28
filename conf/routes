@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET        /                                       controllers.Application.index
+GET        /socket                                 controllers.Application.socket
+GET        /widget                                 controllers.Application.widget
+GET        /home-links                             controllers.Application.homeLinks
+GET        /status/about/*protocol/*host           controllers.Status.about(protocol: String, host: String)
+GET        /status/traverse/*protocol/*host        controllers.Status.traverse(protocol: String, host: String)
+GET        /status/history/*protocol/*host         controllers.Status.history(protocol: String, host: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
