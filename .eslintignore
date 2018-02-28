@@ -1,0 +1,6 @@
+dist
+lib
+tests/coverage
+resources/karma/config/base-config-personal.js
+src/vendors
+tests/lib/jasmine-extensions

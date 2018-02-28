@@ -1,0 +1,90 @@
+/** ANIMATIONS **/
+
+/** ZOOM IN **/
+.zoom-enter.zoom-enter-active {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  -webkit-animation: scaleUp .7s ease both;
+  animation: scaleUp .7s ease both;
+}
+
+.zoom-leave.zoom-leave-active {
+  -webkit-animation: scaleDownUp .7s ease both;
+  animation: scaleDownUp .7s ease both;
+}
+
+
+@-webkit-keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.6); }
+}
+@keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.6); transform: scale(.6); }
+}
+
+@-webkit-keyframes scaleUpDown {
+  from { opacity: 0; -webkit-transform: scale(1.4); }
+}
+@keyframes scaleUpDown {
+  from { opacity: 0; -webkit-transform: scale(1.4); transform: scale(1.4); }
+}
+
+
+/** ZOOM OUT **/
+.zoom-out-enter.zoom-out-enter-active {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  -webkit-animation: scaleUpDown .7s ease both;
+  animation: scaleUpDown .7s ease both;
+}
+
+.zoom-out-leave.zoom-out-leave-active {
+  -webkit-animation: scaleDown .7s ease both;
+  animation: scaleDown .7s ease both;
+}
+
+@-webkit-keyframes scaleUp {
+  from { opacity: 0; -webkit-transform: scale(.6); }
+}
+@keyframes scaleUp {
+  from { opacity: 0; -webkit-transform: scale(.6); transform: scale(.6); }
+}
+
+@-webkit-keyframes scaleDownUp {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(1.4); }
+}
+@keyframes scaleDownUp {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(1.4); transform: scale(1.4); }
+}
+
+/** Blink **/
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.6; }
+}
+
+.loadingBlink {
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+  -webkit-animation-duration: 1.7s;
+}
+
+
+/** Fade In **/
+.fade-in-enter {
+  opacity: 0.01;
+}
+
+.fade-in-enter.fade-in-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-in-leave.fade-in-leave-active {
+  opacity: 0.01;
+  transition: opacity 0.5s ease-out;
+}

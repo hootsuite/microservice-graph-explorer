@@ -1,0 +1,55 @@
+{
+  "env": {
+    "browser": 1,
+    "es6": 1,
+    "jasmine": 1,
+    "node": 1
+  },
+  "ecmaFeatures": {
+    "jsx": 1,
+    "modules": true
+  },
+  "globals": {
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "camelcase": 2,
+    "comma-dangle": 0,
+    "curly": 2,
+    "eol-last": 2,
+    "func-style": [2, "expression"],
+    "quotes": [2, "single", "avoid-escape"],
+    "semi": 2,
+    "no-alert": 0,
+    "no-console": 2,
+    "no-const": 2,
+    "no-constant-condition": 2,
+    "no-debugger": 2,
+    "no-invalid-regexp": 2,
+    "no-let": 2,
+    "no-reserved-keys": 0,
+    "no-underscore-dangle": 0,
+    "no-unreachable": 2,
+    "react/display-name": 2,
+    "react/jsx-boolean-value": 2,
+    "react/jsx-quotes": 2,
+    "react/jsx-no-undef": 2,
+    "react/jsx-sort-props": 2,
+    "react/jsx-sort-prop-types": 2,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 2,
+    "react/no-multi-comp": 2,
+    "react/no-unknown-property": 2,
+    "react/prop-types": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/self-closing-comp": 2,
+    "react/wrap-multilines": 2,
+    "strict": 2,
+    "valid-jsdoc": 0,
+    "valid-typeof": 2
+  }
+}
