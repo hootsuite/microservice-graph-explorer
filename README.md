@@ -62,20 +62,20 @@ to run the dev web server on port 9000. Lastly, open http://localhost:9000
 #### Test with a Microservice Graph
 See [Demo](#demo) section below.
 
-#### Run the app in Docker
+#### Build the app in Docker
 Build the docker container locally
 ```sh
 sbt docker:publishLocal
 ....
-[info] Successfully tagged microservice-graph-explorer:0.0.1-SNAPSHOT
-[info] Built image microservice-graph-explorer:0.0.1-SNAPSHOT
+[info] Successfully tagged microservice-graph-explorer:1.0.1-SNAPSHOT
+[info] Built image microservice-graph-explorer:1.0.1-SNAPSHOT
 ```
 
-Run the container using the image from the previous step (Ex. microservice-graph-explorer:0.0.1-SNAPSHOT) mapping your 
+Run the container using the image from the previous step (Ex. microservice-graph-explorer:1.0.1-SNAPSHOT) mapping your 
 the 9000 port with the same port in the container. This will use the default configuration that is shipped with the code. 
 TODO: Have a default config that points at a Minikube instance of a server? Any other ideas?
 ```ssh
-docker run -p 9000:9000 microservice-graph-explorer:0.0.1-SNAPSHOT
+docker run -p 9000:9000 microservice-graph-explorer:1.0.1-SNAPSHOT
 ```
 
 Lastly, open http://localhost:9000
@@ -86,8 +86,6 @@ Lastly, open http://localhost:9000
 To test the Microservice Graph Explorer with a pre-made service graph: 
 - Clone the repo at [https://github.com/hootsuite/microservice-graph-explorer-test](https://github.com/hootsuite/microservice-graph-explorer-test) and follow the 
 instructions to [Run the Services](https://github.com/hootsuite/microservice-graph-explorer-test#running-the-services).
-- Run the Microservice Graph App locally  using `sbt run`
-- Open http://localhost:9000
 
 ### Watch the Demo Video
 [Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
@@ -95,5 +93,5 @@ instructions to [Run the Services](https://github.com/hootsuite/microservice-gra
 # Configuration
 You can overwrite the default config in docker by mounting a configuration file into the container using the docker run -v flag. Ex.
 ```ssh
-docker run -v [absolute path to local application.conf file]:/opt/docker/conf/application.conf -p 9000:9000 microservice-graph-explorer:0.0.1-SNAPSHOT
+docker run -v [absolute path to local application.conf file]:/opt/docker/conf/application.conf -p 9000:9000 microservice-graph-explorer:1.0.1-SNAPSHOT
 ```
