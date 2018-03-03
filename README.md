@@ -1,8 +1,8 @@
 ![Microservice Graph Explorer](/img/logo-color.png?raw=true "Microservice Graph Explorer")
 
 - [Introduction](#introduction)
-- [Build and Run the App](#build-and-run-the-app)
 - [Demo](#demo)
+- [Build and Run the App](#build-and-run-the-app)
 - [Configuration](#configuration)
 
 # Introduction
@@ -15,6 +15,16 @@ a dashboard with debugging information that can help you discover the source of 
 learning / exploration tool so that the devops peeps in your organization can understand all the different dependencies of your application. 
 [![Microservice Graph Explorer demo video](/img/microservice-graph-explorer.png?raw=true "Microservice Graph Explorer Dashboard")](https://youtu.be/JAoSkddOIC8?t=25m29s)
 [Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
+
+# Demo
+
+### Watch the Demo Video
+[Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
+
+### Use our Pre-made Service Graph
+To test the Microservice Graph Explorer with a pre-made service graph: 
+- Clone the repo at [https://github.com/hootsuite/microservice-graph-explorer-test](https://github.com/hootsuite/microservice-graph-explorer-test) and follow the 
+instructions to [Run the Services](https://github.com/hootsuite/microservice-graph-explorer-test#running-the-services).
 
 # Build and Run the App
 
@@ -60,7 +70,7 @@ sbt run
 to run the dev web server on port 9000. Lastly, open http://localhost:9000
 
 #### Test with a Microservice Graph
-See [Demo](#demo) section below.
+See [Demo](#demo) section.
 
 #### Build the app in Docker
 Build the docker container locally
@@ -73,22 +83,11 @@ sbt docker:publishLocal
 
 Run the container using the image from the previous step (Ex. microservice-graph-explorer:1.0.1-SNAPSHOT) mapping your 
 the 9000 port with the same port in the container. This will use the default configuration that is shipped with the code. 
-TODO: Have a default config that points at a Minikube instance of a server? Any other ideas?
 ```ssh
 docker run -p 9000:9000 microservice-graph-explorer:1.0.1-SNAPSHOT
 ```
 
 Lastly, open http://localhost:9000
-
-# Demo
-
-### Use our Pre-made Service Graph
-To test the Microservice Graph Explorer with a pre-made service graph: 
-- Clone the repo at [https://github.com/hootsuite/microservice-graph-explorer-test](https://github.com/hootsuite/microservice-graph-explorer-test) and follow the 
-instructions to [Run the Services](https://github.com/hootsuite/microservice-graph-explorer-test#running-the-services).
-
-### Watch the Demo Video
-[Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
 
 # Configuration
 You can overwrite the default config in docker by mounting a configuration file into the container using the docker run -v flag. Ex.
