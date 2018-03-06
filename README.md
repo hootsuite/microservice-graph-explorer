@@ -1,9 +1,13 @@
-![Microservice Graph Explorer](/img/logo-color.png?raw=true "Microservice Graph Explorer")
+![Microservice Graph Explorer](/img/microservice-graph-explorer-logo-color.png?raw=true "Microservice Graph Explorer")
 
 - [Introduction](#introduction)
-- [Build and Run the App](#build-and-run-the-app)
 - [Demo](#demo)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Docker Hub](#docker-hub)
 - [Configuration](#configuration)
+- [Development Workflow](#development-workflow)
+- [How To Contribute](#how-to-contribute)
 
 # Introduction
 The "Microservice Graph Explorer" (aka MGE) is a web application that lets users browse a microservice graph in real time. It is a 
@@ -16,7 +20,87 @@ learning / exploration tool so that the devops peeps in your organization can un
 [![Microservice Graph Explorer demo video](/img/microservice-graph-explorer.png?raw=true "Microservice Graph Explorer Dashboard")](https://youtu.be/JAoSkddOIC8?t=25m29s)
 [Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
 
-# Build and Run the App
+# Demo
+
+### Use our Pre-made Service Graph
+To test the Microservice Graph Explorer with a pre-made service graph: 
+- Clone the repo at [https://github.com/hootsuite/microservice-graph-explorer-test](https://github.com/hootsuite/microservice-graph-explorer-test) and follow the 
+instructions to [Run the Services](https://github.com/hootsuite/microservice-graph-explorer-test#running-the-services).
+
+### Watch the Demo Video
+[Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
+
+# Features
+
+### Microservice Dashboards
+The Microservice Graph Explorer provides a dashboard for each service in your service graph. These dashboards [have static deep links](src/app-status.js#L25) 
+that you can save and link to from your documentation. The dashboards will automatically refresh with up to date info / health every 1 minute (This can be changed in config.). 
+All dashboards will also stay in sync across all viewers because all data is pushed from the server to the browser using websockets and the backend is purely 
+event driven. This is great because it means all users will always have the same view of the same data at the same time. 
+
+### Microservice Graph Health
+The root dashboard for each application that the MGE monitors has the complete service graph health. Because the Health Checks API links services 
+together as external dependencies, it means that if you check the health of the top node in a microservices graph, this health check propagates over the whole 
+graph giving you a snapshot in time of the graphs health. It truly allows you to see your applications health like a user does. 
+
+### Health Widget
+The Microservice Graph Explorer also provides a "Health Widget" that you can embed on other web applications [via an iFrame](src/app-widget.js#L19). 
+A common use case for this is to embed it in your build pipeline or on an internal health / status page. The widget is also always in sync with dashboards as 
+it uses a websocket and gets its data pushed from the server. The widget is also clickable and opens a new window to the applicable dashboard.
+
+<img src="https://github.com/hootsuite/microservice-graph-explorer/raw/master/img/microservice-graph-explorer-widget.png?raw=true" width="241" height="110" />
+
+Ex. Embed in iFrame monitor `http://demo-app:8080` with:
+```html
+<iframe src="http://localhost:9000/widget#/status-indicator/http/demo-app:8080" width="20" height="20" frameborder="0"></iframe>
+```
+
+# Architecture
+![Microservice Graph Explorer Architecture](/img/microservice-graph-explorer-architecture.png?raw=true "Microservice Graph Explorer Architecture")
+
+When a user opens a browser to the MGE app, a new websocket connection is opened connecting that browser to the backend MGE app. This connection 
+is used to push front end app state and receive events from the backend Status poller. As a user navigates around the app, the front end sends 
+application state to the backend so that the backend can poll the correct services and report back with health. This allows the UI to synchronize state 
+between all users.
+
+# Docker Hub
+We have published a blessed 1.0.0 version of The Microservice Graph Explorer to Docker hub at [https://hub.docker.com/r/hootsuite/microservice-graph-explorer/](https://hub.docker.com/r/hootsuite/microservice-graph-explorer/).
+
+To pull and run the blessed image:
+```bash
+docker pull hootsuite/microservice-graph-explorer:1.0.0
+...
+docker run -p 9000:9000 hootsuite/microservice-graph-explorer:1.0.0
+```
+Lastly, open [http://localhost:9000](http://localhost:9000)
+
+# Configuration
+```yaml
+microservice-graph-explorer {
+  traverse {
+    applications = [
+      # The URLs to monitor by default
+      # format: "protocol(http|https),Application URL to check,Friendly Name for homepage"
+      # The default config below points at our test service graph that you can run locally. See http://github.com/hootsuite/microservice-graph-explorer-test
+      "http,localhost:8080,Test Service Graph"
+    ]
+  }
+  status-poller {
+    poll-interval = 60 seconds   # The interval between polling in the Status Polling Actor.
+    remove-router-delay = 1 hour # How long the Status Polling Actor will poll a non default application for before unsubscribing it.
+  }
+}
+```
+The above settings can be changed in [application.conf](conf/application.conf#L22) or per environment in dev.conf, staging.conf 
+and production.conf
+
+### Overwrite Config in Docker
+You can overwrite the default config in docker by mounting a configuration file into the container using the docker run -v flag. Ex.
+```ssh
+docker run -v [absolute path to local application.conf file]:/opt/docker/conf/application.conf -p 9000:9000 hootsuite/microservice-graph-explorer:1.0.0
+```
+
+# Development Workflow
 
 ### Install Build tools
 If you want to make custom changes or want to build the code from scratch you need the following dependencies installed:
@@ -60,7 +144,7 @@ sbt run
 to run the dev web server on port 9000. Lastly, open http://localhost:9000
 
 #### Test with a Microservice Graph
-See [Demo](#demo) section below.
+See [Demo](#demo) section.
 
 #### Build the app in Docker
 Build the docker container locally
@@ -73,25 +157,16 @@ sbt docker:publishLocal
 
 Run the container using the image from the previous step (Ex. microservice-graph-explorer:1.0.1-SNAPSHOT) mapping your 
 the 9000 port with the same port in the container. This will use the default configuration that is shipped with the code. 
-TODO: Have a default config that points at a Minikube instance of a server? Any other ideas?
 ```ssh
 docker run -p 9000:9000 microservice-graph-explorer:1.0.1-SNAPSHOT
 ```
 
-Lastly, open http://localhost:9000
+Lastly, open [http://localhost:9000](http://localhost:9000)
 
-# Demo
+# How To Contribute
+Contribute by submitting a PR and a bug report in GitHub.
 
-### Use our Pre-made Service Graph
-To test the Microservice Graph Explorer with a pre-made service graph: 
-- Clone the repo at [https://github.com/hootsuite/microservice-graph-explorer-test](https://github.com/hootsuite/microservice-graph-explorer-test) and follow the 
-instructions to [Run the Services](https://github.com/hootsuite/microservice-graph-explorer-test#running-the-services).
-
-### Watch the Demo Video
-[Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
-
-# Configuration
-You can overwrite the default config in docker by mounting a configuration file into the container using the docker run -v flag. Ex.
-```ssh
-docker run -v [absolute path to local application.conf file]:/opt/docker/conf/application.conf -p 9000:9000 microservice-graph-explorer:1.0.1-SNAPSHOT
-```
+# Maintainers
+- :octocat: [Adam Arsenault](https://github.com/HootAdam) - [@Adam_Arsenault](https://twitter.com/Adam_Arsenault)
+- :octocat: [Steve Song](https://github.com/ssong-van) - [@ssongvan](https://twitter.com/ssongvan)
+- :octocat: [Eric Puchmayr](https://github.com/erichoot) - [@ltkilroy](https://twitter.com/ltkilroy)
