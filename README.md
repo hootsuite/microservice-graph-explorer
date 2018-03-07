@@ -13,10 +13,9 @@
 The "Microservice Graph Explorer" (aka MGE) is a web application that lets users browse a microservice graph in real time. It is a 
 debugging/visualization tool for microservices that implement the [Health Checks API](https://github.com/hootsuite/health-checks-api).
 
-Navigate to all of the microservices in your application in real time using the real application connections. 
-The Microservice Graph Explorer gives you the ability to monitor the health of your microservices, and provides 
-a dashboard with debugging information that can help you discover the source of outages in no time. It also works as a great 
-learning / exploration tool so that the devops peeps in your organization can understand all the different dependencies of your application. 
+The Microservice Graph Explorer gives you the ability to monitor the health of all your microservices in real time, and provides 
+a dashboard with debugging information that can help you discover the source of outages quickly. It also works as a great 
+learning / exploration tool so that the DevOps peeps in your organization can understand all the different dependencies of your application. 
 [![Microservice Graph Explorer demo video](/img/microservice-graph-explorer.png?raw=true "Microservice Graph Explorer Dashboard")](https://youtu.be/JAoSkddOIC8?t=25m29s)
 [Watch demo video](https://youtu.be/JAoSkddOIC8?t=25m29s)
 
@@ -34,19 +33,19 @@ instructions to [Run the Services](https://github.com/hootsuite/microservice-gra
 
 ### Microservice Dashboards
 The Microservice Graph Explorer provides a dashboard for each service in your service graph. These dashboards [have static deep links](src/app-status.js#L25) 
-that you can save and link to from your documentation. The dashboards will automatically refresh with up to date info / health every 1 minute (This can be changed in config.). 
-All dashboards will also stay in sync across all viewers because all data is pushed from the server to the browser using websockets and the backend is purely 
-event driven. This is great because it means all users will always have the same view of the same data at the same time. 
+that you can save and link to from your documentation. The dashboards will automatically refresh with the current info / health every 1 minute (configurable). 
+All dashboards stay in sync across all viewers because the data is pushed from the host server to the browser using websockets and has an event driven backend.
+This is great because it means all users will always have a consistent view of your microservices health. 
 
 ### Microservice Graph Health
-The root dashboard for each application that the MGE monitors has the complete service graph health. Because the Health Checks API links services 
+The root dashboard for each application that is monitored, has the complete service graph health. Because the Health Checks API links services 
 together as external dependencies, it means that if you check the health of the top node in a microservices graph, this health check propagates over the whole 
-graph giving you a snapshot in time of the graphs health. It truly allows you to see your applications health like a user does. 
+graph giving you a snapshot in time of the overall graphs health. It truly allows you to see your applications health from the perspective of a user. 
 
 ### Health Widget
 The Microservice Graph Explorer also provides a "Health Widget" that you can embed on other web applications [via an iFrame](src/app-widget.js#L19). 
-A common use case for this is to embed it in your build pipeline or on an internal health / status page. The widget is also always in sync with dashboards as 
-it uses a websocket and gets its data pushed from the server. The widget is also clickable and opens a new window to the applicable dashboard.
+Embed it in your build pipeline or on a health status page, this ensures that everyone sees the current health of your applications. The widget is also clickable
+and opens to the applicable dashboard.
 
 <img src="https://github.com/hootsuite/microservice-graph-explorer/raw/master/img/microservice-graph-explorer-widget.png?raw=true" width="241" height="110" />
 
@@ -58,8 +57,8 @@ Ex. Embed in iFrame monitor `http://demo-app:8080` with:
 # Architecture
 ![Microservice Graph Explorer Architecture](/img/microservice-graph-explorer-architecture.png?raw=true "Microservice Graph Explorer Architecture")
 
-When a user opens a browser to the MGE app, a new websocket connection is opened connecting that browser to the backend MGE app. This connection 
-is used to push front end app state and receive events from the backend Status poller. As a user navigates around the app, the front end sends 
+When a user opens a browser to view the MGE app, a new websocket connection is opened which connects to the backend MGE app. This connection 
+is used to push front end app state and receive events from the backend status poller. As a user navigates around the app, the front end sends 
 application state to the backend so that the backend can poll the correct services and report back with health. This allows the UI to synchronize state 
 between all users.
 
@@ -118,14 +117,14 @@ If you want to run/deploy the MGE using Docker, install Docker from [https://doc
 The MGE project uses an SBT plugin called [SBT Native Packager](https://www.scala-sbt.org/sbt-native-packager/formats/docker.html) to package 
 the app using docker to make running/deployment easier.
 
-### Install Javascript Dependencies
+### Install JavaScript Dependencies
 Install all the necessary node modules by running
 
 ```sh
 npm install
 ```
 
-### Build Javascript Bundles
+### Build JavaScript Bundles
 Run
 
 ```sh
