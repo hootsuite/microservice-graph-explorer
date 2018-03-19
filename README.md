@@ -59,7 +59,7 @@ Ex. Embed in iFrame monitor `http://demo-app:8080` with:
 
 When a user opens a browser to view the MGE app, a new websocket connection is opened which connects to the backend MGE app. This connection 
 is used to push front end app state and receive events from the backend status poller. As a user navigates around the app, the front end sends 
-application state to the backend so that the backend can poll the correct services and report back with health. This allows the UI to synchronize state 
+application state to the backend so that the backend can poll the correct services via the [Health Checks API](https://github.com/hootsuite/health-checks-api) and report back with its health status and its dependencies. This allows the UI to synchronize state 
 between all users.
 
 # Docker Hub
