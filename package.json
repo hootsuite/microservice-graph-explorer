@@ -30,7 +30,7 @@
     "classnames": "1.2.2",
     "css-loader": "^0.15.6",
     "es6-promise": "2.1.1",
-    "eslint": "0.20.0",
+    "eslint": "^6.0.1",
     "eslint-plugin-react": "2.2.0",
     "eventemitter3": "0.1.6",
     "events": "1.0.2",
