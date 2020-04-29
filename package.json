@@ -40,7 +40,7 @@
     "fastclick": "1.0.6",
     "flummox": "4.0.0-alpha2",
     "install": "^0.1.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "js-md5": "0.3.0",
     "jsx-loader": "0.12.2",
     "jsxhint": "^0.15.1",
