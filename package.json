@@ -46,7 +46,7 @@
     "jsxhint": "^0.15.1",
     "less": "^2.7.3",
     "less-loader": "^2.2.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "mocha": "^6.1.4",
     "node-libs-browser": "^2.0.0",
     "npm": "^6.14.6",
