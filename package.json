@@ -49,7 +49,7 @@
     "lodash": "4.17.21",
     "mocha": "^6.1.4",
     "node-libs-browser": "^2.0.0",
-    "npm": "^6.14.6",
+    "npm": "^9.6.5",
     "object-assign": "2.0.0",
     "pygmentize-bundled": "^2.3.0",
     "react": "0.14.0",
